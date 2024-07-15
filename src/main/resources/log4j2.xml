@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="COLORS_BY_LEVEL">{TRACE=#82fbff, DEBUG=fg_#e6ce81, INFO=fg_#2ee60b, WARN=fg_#f59b42 bold, ERROR=red bold}</Property>
+        <Property name="LOG_PATTERN">%highlight{[%date{HH:mm:ss}] [%thread/%level] [%class{1}] - %message%exception%n}${COLORS_BY_LEVEL}</Property>
+        <Property name="HOME_LOG">logs/</Property>
+        <Property name="NAME_LOG_FILE">latest.log</Property>
+    </Properties>
+
+    <Appenders>
+
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout disableAnsi="false" pattern="${LOG_PATTERN}"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+
+        <Logger name="ua.wyverno" additivity="false" level="TRACE">
+            <AppenderRef ref="console"/>
+        </Logger>
+
+        <Logger name="ua.wyverno.json" additivity="false" level="INFO">
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="org.apache.xmlbeans" additivity="false" level="INFO">
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="org.apache.poi" additivity="false" level="INFO">
+            <AppenderRef ref="console"/>
+        </Logger>
+
+        <Root level="ALL">
+            <AppenderRef ref="console"/>
+        </Root>
+    </Loggers>
+</Configuration>
